@@ -1,19 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://b0864m2ekmq3k"]
+[gd_scene load_steps=5 format=3 uid="uid://b0864m2ekmq3k"]
 
-[ext_resource type="Material" uid="uid://cr6i8y02y2s6v" path="res://Shaders/FFT_Shader.tres" id="1_jafdf"]
-[ext_resource type="Material" uid="uid://cpe1c55jpwnkq" path="res://Shaders/Waterfall_Shader.tres" id="2_y0kte"]
+[ext_resource type="Shader" path="res://Shaders/FFT.gdshader" id="1_i0ker"]
+[ext_resource type="Shader" path="res://Shaders/Waterfall.gdshader" id="2_a8hew"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0nio0"]
+shader = ExtResource("1_i0ker")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ndnov"]
+shader = ExtResource("2_a8hew")
+shader_parameter/time = null
 
 [node name="Main" type="Control"]
 layout_mode = 3
-anchor_right = 1.186
-anchor_bottom = 1.185
-offset_right = -119.04
-offset_bottom = -88.8
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="FFT Display" type="ColorRect" parent="."]
-material = ExtResource("1_jafdf")
+material = SubResource("ShaderMaterial_0nio0")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -28,7 +33,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Waterfall Display" type="ColorRect" parent="."]
-material = ExtResource("2_y0kte")
+material = SubResource("ShaderMaterial_ndnov")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

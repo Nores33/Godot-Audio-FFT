@@ -1,1 +1,3 @@
 res://Scenes/main.tscn
+res://Shaders/FFT.gdshader
+res://Shaders/Waterfall.gdshader
