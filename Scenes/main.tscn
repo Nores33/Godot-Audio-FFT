@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0864m2ekmq3k"]
+[gd_scene load_steps=6 format=3 uid="uid://b0864m2ekmq3k"]
 
 [ext_resource type="Shader" path="res://Shaders/FFT.gdshader" id="1_i0ker"]
 [ext_resource type="Shader" path="res://Shaders/Waterfall.gdshader" id="2_a8hew"]
+[ext_resource type="Texture2D" uid="uid://cpuroefu81oc" path="res://Shaders/Waterfall_Color_Gradient.tres" id="3_hjti7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0nio0"]
 shader = ExtResource("1_i0ker")
@@ -9,9 +10,11 @@ shader = ExtResource("1_i0ker")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ndnov"]
 shader = ExtResource("2_a8hew")
 shader_parameter/time = null
+shader_parameter/Color_Gradient = ExtResource("3_hjti7")
 
 [node name="Main" type="Control"]
 layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2

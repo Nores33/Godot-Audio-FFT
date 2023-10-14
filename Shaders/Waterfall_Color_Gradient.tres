@@ -1,0 +1,6 @@
+[gd_resource type="GradientTexture1D" load_steps=2 format=3 uid="uid://cpuroefu81oc"]
+
+[ext_resource type="Gradient" uid="uid://cdjexe5v4ntnd" path="res://Shaders/SDR_Color_Gradient.tres" id="1_lobmk"]
+
+[resource]
+gradient = ExtResource("1_lobmk")
