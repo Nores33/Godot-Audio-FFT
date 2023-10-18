@@ -10,6 +10,14 @@ const MIN_DB = 60
 var spectrum
 var values = []
 
+func _ready():
+	$WaterfallTimer.start()
+	$FFTTimer.start()
+	spectrum = AudioServer.get_bus_effect_instance(0, 0)
+	$"Waterfall Display".get_material().set_shader_parameter("time",1.0)
+	values.resize(VU_COUNT)
+	values.fill(0.0)
+
 func _process(_delta):
 	var data = []
 	var prev_hz = 0
@@ -22,13 +30,11 @@ func _process(_delta):
 		data.append(height)
 		prev_hz = hz
 	
-	# Sound plays back continuously, so the graph needs to be updated every frame.
-	$"FFT Display".get_material().set_shader_parameter("values",data)
-	$"Waterfall Display".get_material().set_shader_parameter("values",data)
+	for i in range(VU_COUNT):
+		values[i] = data[i]
 
-func _ready():
-	spectrum = AudioServer.get_bus_effect_instance(0, 0)
-	$"Waterfall Display".get_material().set_shader_parameter("time",1000.0)
-	values.resize(VU_COUNT)
-	values.fill(0.0)
-	
+func _on_fft_timer_timeout():
+	$"FFT Display".get_material().set_shader_parameter("values",values)
+
+func _on_waterfall_timer_timeout():
+	$"Waterfall Display".get_material().set_shader_parameter("values",values)

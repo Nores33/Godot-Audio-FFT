@@ -58,3 +58,12 @@ grow_vertical = 2
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_03u7e")
 autoplay = true
+
+[node name="WaterfallTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="FFTTimer" type="Timer" parent="."]
+wait_time = 0.05
+
+[connection signal="timeout" from="WaterfallTimer" to="." method="_on_waterfall_timer_timeout"]
+[connection signal="timeout" from="FFTTimer" to="." method="_on_fft_timer_timeout"]

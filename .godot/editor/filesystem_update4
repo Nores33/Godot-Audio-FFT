@@ -1,5 +1,6 @@
+res://default_bus_layout.tres
 res://Scenes/main.tscn
 res://Shaders/FFT.gdshader
 res://Shaders/Waterfall.gdshader
 res://Shaders/Waterfall_Color_Gradient.tres
-res://Shaders/SDR_Color_Gradient.tres
+res://Scripts/Audio_FFT.gd
