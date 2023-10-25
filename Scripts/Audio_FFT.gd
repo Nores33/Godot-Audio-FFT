@@ -14,7 +14,7 @@ func _ready():
 	$WaterfallTimer.start()
 	$FFTTimer.start()
 	spectrum = AudioServer.get_bus_effect_instance(0, 0)
-	$"Waterfall Display".get_material().set_shader_parameter("time",1.0)
+	#$"WaterfallViewport/ColorRect".get_material().set_shader_parameter("speed",1.0)
 	values.resize(VU_COUNT)
 	values.fill(0.0)
 
@@ -37,4 +37,4 @@ func _on_fft_timer_timeout():
 	$"FFT Display".get_material().set_shader_parameter("values",values)
 
 func _on_waterfall_timer_timeout():
-	$"Waterfall Display".get_material().set_shader_parameter("values",values)
+	$"WaterfallViewport/ColorRect".get_material().set_shader_parameter("values",values)

@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://cvvjq0r4bcekk"]
+
+[ext_resource type="Shader" path="res://Shaders/Waterfall.gdshader" id="1_bnsth"]
+[ext_resource type="Texture2D" uid="uid://cpuroefu81oc" path="res://Shaders/Waterfall_Color_Gradient.tres" id="2_gmvvf"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_myeo1"]
+viewport_path = NodePath(".")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k2uj6"]
+resource_local_to_scene = true
+shader = ExtResource("1_bnsth")
+shader_parameter/speed = null
+shader_parameter/values = null
+shader_parameter/prev = SubResource("ViewportTexture_myeo1")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_5f3xx"]
+viewport_path = NodePath("Buffer")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3g7jc"]
+resource_local_to_scene = true
+shader = ExtResource("1_bnsth")
+shader_parameter/speed = null
+shader_parameter/values = null
+shader_parameter/prev = SubResource("ViewportTexture_5f3xx")
+shader_parameter/Color_Gradient = ExtResource("2_gmvvf")
+
+[node name="WaterfallViewport" type="SubViewport"]
+size = Vector2i(256, 100)
+
+[node name="Buffer" type="SubViewport" parent="."]
+size = Vector2i(256, 100)
+
+[node name="ColorRect" type="ColorRect" parent="Buffer"]
+material = SubResource("ShaderMaterial_k2uj6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_3g7jc")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
