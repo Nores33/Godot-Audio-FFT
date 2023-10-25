@@ -2,13 +2,15 @@
 
 [ext_resource type="Script" path="res://Scripts/Audio_FFT.gd" id="1_3jwv1"]
 [ext_resource type="Shader" path="res://Shaders/FFT.gdshader" id="1_i0ker"]
-[ext_resource type="Texture2D" uid="uid://brb3gxrhvu5f7" path="res://res/Waterfall.tres" id="3_pvs32"]
 [ext_resource type="PackedScene" uid="uid://cvvjq0r4bcekk" path="res://Scenes/waterfall_viewport.tscn" id="4_cj5no"]
-[ext_resource type="AudioStream" uid="uid://uwnuqfmnl60r" path="res://maldita.ogg" id="5_03u7e"]
+[ext_resource type="AudioStream" uid="uid://x4t5i3j1hdev" path="res://tone_sweep.mp3" id="5_2krvi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0nio0"]
 shader = ExtResource("1_i0ker")
 shader_parameter/values = PackedFloat32Array()
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_o8xtw"]
+viewport_path = NodePath("WaterfallViewport")
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -47,12 +49,12 @@ offset_right = 128.0
 offset_bottom = 110.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_pvs32")
+texture = SubResource("ViewportTexture_o8xtw")
 
 [node name="WaterfallViewport" parent="." instance=ExtResource("4_cj5no")]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_03u7e")
+stream = ExtResource("5_2krvi")
 autoplay = true
 
 [node name="WaterfallTimer" type="Timer" parent="."]

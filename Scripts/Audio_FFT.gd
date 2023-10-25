@@ -5,7 +5,7 @@ const FREQ_MAX = 11050.0
 
 const WIDTH = 256
 const HEIGHT = 100
-const MIN_DB = 60
+const MIN_DB = 130
 
 var spectrum
 var values = []
@@ -14,7 +14,7 @@ func _ready():
 	$WaterfallTimer.start()
 	$FFTTimer.start()
 	spectrum = AudioServer.get_bus_effect_instance(0, 0)
-	#$"WaterfallViewport/ColorRect".get_material().set_shader_parameter("speed",1.0)
+	# $"WaterfallViewport/ColorRect".get_material().set_shader_parameter("time_factor", 5)
 	values.resize(VU_COUNT)
 	values.fill(0.0)
 

@@ -2,14 +2,13 @@ shader_type canvas_item;
 
 #define SAMPLES 256
 
-uniform float speed;
+uniform int time_factor;
 uniform float values[SAMPLES];
 
 uniform sampler2D prev;
 uniform sampler2D Color_Gradient : hint_default_black;
 
 void fragment() {
-	// Place fragment code here.
 	vec2 tex_size = vec2(textureSize(prev, 0));
 	float pixel_size = 1.0/tex_size.y;
 	if (UV.y < pixel_size) {

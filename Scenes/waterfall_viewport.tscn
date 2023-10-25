@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://cvvjq0r4bcekk"]
 
 [ext_resource type="Shader" path="res://Shaders/Waterfall.gdshader" id="1_bnsth"]
-[ext_resource type="Shader" uid="uid://db3bp8sgfwrbn" path="res://Shaders/buffer.tres" id="1_rrl7l"]
 [ext_resource type="Texture2D" uid="uid://cpuroefu81oc" path="res://Shaders/Waterfall_Color_Gradient.tres" id="2_gmvvf"]
+[ext_resource type="Shader" path="res://Shaders/Waterfall_Buffer.gdshader" id="3_i30pp"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_iybwb"]
 viewport_path = NodePath("Buffer")
@@ -10,18 +10,18 @@ viewport_path = NodePath("Buffer")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3g7jc"]
 resource_local_to_scene = true
 shader = ExtResource("1_bnsth")
-shader_parameter/speed = 1.0
+shader_parameter/time_factor = null
 shader_parameter/values = null
 shader_parameter/prev = SubResource("ViewportTexture_iybwb")
 shader_parameter/Color_Gradient = ExtResource("2_gmvvf")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_dqnp0"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_1t7cu"]
 viewport_path = NodePath(".")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k2uj6"]
 resource_local_to_scene = true
-shader = ExtResource("1_rrl7l")
-shader_parameter/Texture2DParameter = SubResource("ViewportTexture_dqnp0")
+shader = ExtResource("3_i30pp")
+shader_parameter/buffer = SubResource("ViewportTexture_1t7cu")
 
 [node name="WaterfallViewport" type="SubViewport"]
 size = Vector2i(256, 100)
