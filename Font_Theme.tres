@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://b7rnt3j5nova8"]
+
+[ext_resource type="FontFile" uid="uid://de3clrck8tnoj" path="res://Fonts/Windows Regular.ttf" id="1_wwtqa"]
+
+[resource]
+default_font = ExtResource("1_wwtqa")
+default_font_size = 12

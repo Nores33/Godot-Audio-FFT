@@ -24,7 +24,7 @@ shader = ExtResource("3_i30pp")
 shader_parameter/buffer = SubResource("ViewportTexture_1t7cu")
 
 [node name="WaterfallViewport" type="SubViewport"]
-size = Vector2i(256, 100)
+size = Vector2i(256, 140)
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_3g7jc")
@@ -35,7 +35,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Buffer" type="SubViewport" parent="."]
-size = Vector2i(256, 100)
+size = Vector2i(256, 140)
 
 [node name="ColorRect" type="ColorRect" parent="Buffer"]
 material = SubResource("ShaderMaterial_k2uj6")

@@ -11,7 +11,6 @@ var spectrum
 var values = []
 
 func _ready():
-	$WaterfallTimer.start()
 	$FFTTimer.start()
 	spectrum = AudioServer.get_bus_effect_instance(0, 0)
 	# $"WaterfallViewport/ColorRect".get_material().set_shader_parameter("time_factor", 5)
@@ -32,9 +31,8 @@ func _process(_delta):
 	
 	for i in range(VU_COUNT):
 		values[i] = data[i]
+	
+	$"Panel/Waterfall Graph/WaterfallViewport/ColorRect".get_material().set_shader_parameter("values",values)
 
 func _on_fft_timer_timeout():
-	$"FFT Display".get_material().set_shader_parameter("values",values)
-
-func _on_waterfall_timer_timeout():
-	$"WaterfallViewport/ColorRect".get_material().set_shader_parameter("values",values)
+	$"Panel/FFT Graph/FFT Display".get_material().set_shader_parameter("values",values)

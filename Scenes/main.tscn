@@ -1,16 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://b0864m2ekmq3k"]
+[gd_scene load_steps=10 format=3 uid="uid://b0864m2ekmq3k"]
 
 [ext_resource type="Script" path="res://Scripts/Audio_FFT.gd" id="1_3jwv1"]
 [ext_resource type="Shader" path="res://Shaders/FFT.gdshader" id="1_i0ker"]
+[ext_resource type="AudioStream" uid="uid://x4t5i3j1hdev" path="res://tone_sweep.mp3" id="2_rxf1e"]
+[ext_resource type="Script" path="res://Scripts/FFT Graph.gd" id="3_su4kd"]
+[ext_resource type="Theme" uid="uid://b7rnt3j5nova8" path="res://Font_Theme.tres" id="3_yqxh4"]
 [ext_resource type="PackedScene" uid="uid://cvvjq0r4bcekk" path="res://Scenes/waterfall_viewport.tscn" id="4_cj5no"]
-[ext_resource type="AudioStream" uid="uid://x4t5i3j1hdev" path="res://tone_sweep.mp3" id="5_2krvi"]
+[ext_resource type="FontFile" uid="uid://de3clrck8tnoj" path="res://Fonts/Windows Regular.ttf" id="4_h0n6g"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0nio0"]
 shader = ExtResource("1_i0ker")
 shader_parameter/values = PackedFloat32Array()
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_o8xtw"]
-viewport_path = NodePath("WaterfallViewport")
+[sub_resource type="ViewportTexture" id="ViewportTexture_g1w2d"]
+viewport_path = NodePath("Panel/Waterfall Graph/WaterfallViewport")
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -21,47 +24,124 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3jwv1")
 
-[node name="FFT Display" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_0nio0")
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -110.0
-offset_right = 128.0
-offset_bottom = -10.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Waterfall Display" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = 10.0
-offset_right = 128.0
-offset_bottom = 110.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("ViewportTexture_o8xtw")
-
-[node name="WaterfallViewport" parent="." instance=ExtResource("4_cj5no")]
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_2krvi")
+stream = ExtResource("2_rxf1e")
 autoplay = true
-
-[node name="WaterfallTimer" type="Timer" parent="."]
-wait_time = 0.05
 
 [node name="FFTTimer" type="Timer" parent="."]
 wait_time = 0.05
 
-[connection signal="timeout" from="WaterfallTimer" to="." method="_on_waterfall_timer_timeout"]
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -135.0
+offset_right = 160.0
+offset_bottom = 165.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_yqxh4")
+
+[node name="FFT Graph" type="Control" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -148.0
+offset_right = 148.0
+offset_bottom = 140.0
+grow_horizontal = 2
+script = ExtResource("3_su4kd")
+X_Label = "Hz"
+X_ticks = 8
+Y_Label = "dBm"
+Y_ticks = 4
+
+[node name="Y_Label" type="Label" parent="Panel/FFT Graph"]
+layout_mode = 1
+offset_right = 20.0
+offset_bottom = 20.0
+theme_override_fonts/font = ExtResource("4_h0n6g")
+theme_override_font_sizes/font_size = 12
+text = "dBm"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Y_Ticks_Container" type="VBoxContainer" parent="Panel/FFT Graph"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_top = 20.0
+offset_right = 20.0
+offset_bottom = -20.0
+grow_vertical = 2
+
+[node name="FFT Display" type="ColorRect" parent="Panel/FFT Graph"]
+material = SubResource("ShaderMaterial_0nio0")
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -276.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 120.0
+grow_horizontal = 0
+
+[node name="X_Label" type="Label" parent="Panel/FFT Graph"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("4_h0n6g")
+theme_override_font_sizes/font_size = 12
+text = "Hz"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="X_Ticks_Container" type="HBoxContainer" parent="Panel/FFT Graph"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -20.0
+offset_right = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Waterfall Graph" type="Control" parent="Panel"]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.467
+anchor_right = 0.5
+anchor_bottom = 0.467
+offset_left = -128.0
+offset_top = -0.100006
+offset_right = 128.0
+offset_bottom = 139.9
+grow_horizontal = 2
+
+[node name="Waterfall Display" type="TextureRect" parent="Panel/Waterfall Graph"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_g1w2d")
+
+[node name="WaterfallViewport" parent="Panel/Waterfall Graph" instance=ExtResource("4_cj5no")]
+
 [connection signal="timeout" from="FFTTimer" to="." method="_on_fft_timer_timeout"]
