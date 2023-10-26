@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Audio_FFT.gd" id="1_3jwv1"]
 [ext_resource type="Shader" path="res://Shaders/FFT.gdshader" id="1_i0ker"]
-[ext_resource type="AudioStream" uid="uid://x4t5i3j1hdev" path="res://tone_sweep.mp3" id="2_rxf1e"]
+[ext_resource type="AudioStream" uid="uid://dau016m3kyyh3" path="res://PD120 SSTV Test Recording.mp3" id="2_t28n0"]
 [ext_resource type="Script" path="res://Scripts/FFT Graph.gd" id="3_su4kd"]
 [ext_resource type="Theme" uid="uid://b7rnt3j5nova8" path="res://Font_Theme.tres" id="3_yqxh4"]
 [ext_resource type="PackedScene" uid="uid://cvvjq0r4bcekk" path="res://Scenes/waterfall_viewport.tscn" id="4_cj5no"]
@@ -11,6 +11,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0nio0"]
 shader = ExtResource("1_i0ker")
 shader_parameter/values = PackedFloat32Array()
+shader_parameter/line_color = Vector4(1, 1, 1, 1)
+shader_parameter/bg_color = Vector4(0, 0, 0, 1)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_g1w2d"]
 viewport_path = NodePath("Panel/Waterfall Graph/WaterfallViewport")
@@ -25,7 +27,7 @@ grow_vertical = 2
 script = ExtResource("1_3jwv1")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_rxf1e")
+stream = ExtResource("2_t28n0")
 autoplay = true
 
 [node name="FFTTimer" type="Timer" parent="."]
@@ -41,7 +43,7 @@ anchor_bottom = 0.5
 offset_left = -160.0
 offset_top = -135.0
 offset_right = 160.0
-offset_bottom = 165.0
+offset_bottom = 175.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_yqxh4")
@@ -56,10 +58,12 @@ offset_right = 148.0
 offset_bottom = 140.0
 grow_horizontal = 2
 script = ExtResource("3_su4kd")
-X_Label = "Hz"
+Line_Color = Color(0.988235, 1, 0.686275, 1)
+BG_Color = Color(0, 0, 0.294118, 1)
+X_Label = "KHz"
 X_ticks = 8
 Y_Label = "dBm"
-Y_ticks = 4
+Y_ticks = 2
 
 [node name="Y_Label" type="Label" parent="Panel/FFT Graph"]
 layout_mode = 1
@@ -75,10 +79,16 @@ vertical_alignment = 1
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
-offset_top = 20.0
-offset_right = 20.0
-offset_bottom = -20.0
+offset_top = 13.0
+offset_right = 14.0
+offset_bottom = -10.0
 grow_vertical = 2
+
+[node name="First_Label" type="Label" parent="Panel/FFT Graph/Y_Ticks_Container"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="FFT Display" type="ColorRect" parent="Panel/FFT Graph"]
 material = SubResource("ShaderMaterial_0nio0")
@@ -99,8 +109,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -20.0
+offset_left = -11.0
+offset_top = -11.0
+offset_right = 9.0
+offset_bottom = 9.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("4_h0n6g")
@@ -115,22 +127,28 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = -20.0
-offset_right = -20.0
+offset_left = 17.0
+offset_top = -10.0
+offset_right = -16.0
+offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="First_Label" type="Label" parent="Panel/FFT Graph/X_Ticks_Container"]
+layout_mode = 2
+text = "0"
+vertical_alignment = 1
 
 [node name="Waterfall Graph" type="Control" parent="Panel"]
 layout_mode = 1
 anchor_left = 0.5
-anchor_top = 0.467
+anchor_top = 0.484
 anchor_right = 0.5
-anchor_bottom = 0.467
+anchor_bottom = 0.484
 offset_left = -128.0
-offset_top = -0.100006
+offset_top = -0.0400085
 offset_right = 128.0
-offset_bottom = 139.9
+offset_bottom = 139.96
 grow_horizontal = 2
 
 [node name="Waterfall Display" type="TextureRect" parent="Panel/Waterfall Graph"]

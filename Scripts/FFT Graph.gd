@@ -20,18 +20,23 @@ func _ready():
 	$Y_Label.set_text(Y_Label)
 	$X_Label.set_text(X_Label)
 	
+	$"FFT Display".get_material().set_shader_parameter("line_color", Line_Color)
+	$"FFT Display".get_material().set_shader_parameter("bg_color", BG_Color)
+	
 	for i in range(X_ticks):
-		var x_tick = Label.new()
-		x_tick.add_theme_font_size_override("font size", 5)
+		var x_tick = Control.new()
 		x_tick.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		x_tick.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		$X_Ticks_Container.add_child(x_tick)
+		x_tick = Label.new()
+		x_tick.vertical_alignment=VERTICAL_ALIGNMENT_CENTER
 		x_tick.text = "0"
 		$X_Ticks_Container.add_child(x_tick)
 	
 	for i in range(Y_ticks):
-		var y_tick = Label.new()
-		y_tick.add_theme_font_size_override("font size", 5)
+		var y_tick = Control.new()
 		y_tick.size_flags_vertical = Control.SIZE_EXPAND_FILL
-		y_tick.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		$Y_Ticks_Container.add_child(y_tick)
+		y_tick = Label.new()
+		y_tick.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
 		y_tick.text = "0"
 		$Y_Ticks_Container.add_child(y_tick)

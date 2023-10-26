@@ -1,11 +1,11 @@
 extends Control
 
 const VU_COUNT = 256
-const FREQ_MAX = 11050.0
+const FREQ_MAX = 4000.0
 
 const WIDTH = 256
 const HEIGHT = 100
-const MIN_DB = 130
+const MIN_DB = 80
 
 var spectrum
 var values = []
