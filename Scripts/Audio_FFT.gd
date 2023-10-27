@@ -1,14 +1,29 @@
 extends Control
 
 const VU_COUNT = 256
-const FREQ_MAX = 4000.0
+const FREQ_MAX = 10000.0
 
 const WIDTH = 256
 const HEIGHT = 100
-const MIN_DB = 80
+const MIN_DB = 60
 
 var spectrum
 var values = []
+
+# FFT Graph
+@export var Line_Color : Color = Color.YELLOW
+@export var BG_Color : Color = Color.BLACK
+
+@export var X_Label = ""
+@export var X_ticks = 1
+@export var Y_Label = ""
+@export var Y_ticks = 1
+
+var X_min_value = 0
+var X_max_value : float = FREQ_MAX/1000.0
+
+var Y_min_value : float = -MIN_DB
+var Y_max_value = 0
 
 func _ready():
 	$FFTTimer.start()
@@ -16,6 +31,35 @@ func _ready():
 	# $"WaterfallViewport/ColorRect".get_material().set_shader_parameter("time_factor", 5)
 	values.resize(VU_COUNT)
 	values.fill(0.0)
+	
+	# Prepare FFT Graph
+	$"Panel/FFT Graph/Y_Label".set_text(Y_Label)
+	$"Panel/FFT Graph/X_Label".set_text(X_Label)
+	
+	$"Panel/FFT Graph/FFT Display".get_material().set_shader_parameter("line_color", Line_Color)
+	$"Panel/FFT Graph/FFT Display".get_material().set_shader_parameter("bg_color", BG_Color)
+	$"Panel/FFT Graph/FFT Display".get_material().set_shader_parameter("vertical_grid_lines", X_ticks)
+	$"Panel/FFT Graph/FFT Display".get_material().set_shader_parameter("horizontal_grid_lines", Y_ticks)
+	
+	var freq_steps = X_max_value/X_ticks
+	for i in range(X_ticks):
+		var x_tick = Control.new()
+		x_tick.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		$"Panel/FFT Graph/X_Ticks_Container".add_child(x_tick)
+		x_tick = Label.new()
+		x_tick.vertical_alignment=VERTICAL_ALIGNMENT_CENTER
+		x_tick.text = "%.2f" % (freq_steps*(i+1))
+		$"Panel/FFT Graph/X_Ticks_Container".add_child(x_tick)
+	
+	var db_steps = Y_min_value/Y_ticks
+	for i in range(Y_ticks):
+		var y_tick = Control.new()
+		y_tick.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		$"Panel/FFT Graph/Y_Ticks_Container".add_child(y_tick)
+		y_tick = Label.new()
+		y_tick.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+		y_tick.text = "%.1f" % (db_steps*(i+1))
+		$"Panel/FFT Graph/Y_Ticks_Container".add_child(y_tick)
 
 func _process(_delta):
 	var data = []

@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://b0864m2ekmq3k"]
+[gd_scene load_steps=9 format=3 uid="uid://b0864m2ekmq3k"]
 
 [ext_resource type="Script" path="res://Scripts/Audio_FFT.gd" id="1_3jwv1"]
 [ext_resource type="Shader" path="res://Shaders/FFT.gdshader" id="1_i0ker"]
 [ext_resource type="AudioStream" uid="uid://dau016m3kyyh3" path="res://PD120 SSTV Test Recording.mp3" id="2_t28n0"]
-[ext_resource type="Script" path="res://Scripts/FFT Graph.gd" id="3_su4kd"]
 [ext_resource type="Theme" uid="uid://b7rnt3j5nova8" path="res://Font_Theme.tres" id="3_yqxh4"]
 [ext_resource type="PackedScene" uid="uid://cvvjq0r4bcekk" path="res://Scenes/waterfall_viewport.tscn" id="4_cj5no"]
 [ext_resource type="FontFile" uid="uid://de3clrck8tnoj" path="res://Fonts/Windows Regular.ttf" id="4_h0n6g"]
@@ -13,8 +12,10 @@ shader = ExtResource("1_i0ker")
 shader_parameter/values = PackedFloat32Array()
 shader_parameter/line_color = Vector4(1, 1, 1, 1)
 shader_parameter/bg_color = Vector4(0, 0, 0, 1)
+shader_parameter/vertical_grid_lines = 9
+shader_parameter/horizontal_grid_lines = 3
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_g1w2d"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_128hj"]
 viewport_path = NodePath("Panel/Waterfall Graph/WaterfallViewport")
 
 [node name="Main" type="Control"]
@@ -25,6 +26,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3jwv1")
+Line_Color = Color(0.443137, 0.388235, 0.745098, 1)
+X_Label = "KHz"
+X_ticks = 8
+Y_Label = "DB"
+Y_ticks = 4
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_t28n0")
@@ -57,13 +63,6 @@ offset_left = -148.0
 offset_right = 148.0
 offset_bottom = 140.0
 grow_horizontal = 2
-script = ExtResource("3_su4kd")
-Line_Color = Color(0.988235, 1, 0.686275, 1)
-BG_Color = Color(0, 0, 0.294118, 1)
-X_Label = "KHz"
-X_ticks = 8
-Y_Label = "dBm"
-Y_ticks = 2
 
 [node name="Y_Label" type="Label" parent="Panel/FFT Graph"]
 layout_mode = 1
@@ -79,8 +78,9 @@ vertical_alignment = 1
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
+offset_left = -7.0
 offset_top = 13.0
-offset_right = 14.0
+offset_right = 13.0
 offset_bottom = -10.0
 grow_vertical = 2
 
@@ -158,7 +158,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("ViewportTexture_g1w2d")
+texture = SubResource("ViewportTexture_128hj")
 
 [node name="WaterfallViewport" parent="Panel/Waterfall Graph" instance=ExtResource("4_cj5no")]
 
