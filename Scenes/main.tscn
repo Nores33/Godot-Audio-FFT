@@ -12,8 +12,11 @@ shader = ExtResource("1_i0ker")
 shader_parameter/values = PackedFloat32Array()
 shader_parameter/line_color = Vector4(1, 1, 1, 1)
 shader_parameter/bg_color = Vector4(0, 0, 0, 1)
+shader_parameter/grid_lines_color = Vector4(0.5, 0.5, 0.5, 1)
+shader_parameter/fill_color = Vector4(0.2, 0.2, 0.2, 1)
 shader_parameter/vertical_grid_lines = 9
 shader_parameter/horizontal_grid_lines = 3
+shader_parameter/with_fill = true
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_128hj"]
 viewport_path = NodePath("Panel/Waterfall Graph/WaterfallViewport")
@@ -26,10 +29,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3jwv1")
-Line_Color = Color(0.443137, 0.388235, 0.745098, 1)
+Grid_Lines_Color = Color(0.505882, 0.505882, 0.505882, 1)
+with_fill = true
+Fill_Color = Color(0.25098, 0, 0.94902, 1)
 X_Label = "KHz"
-X_ticks = 8
-Y_Label = "DB"
+X_ticks = 6
 Y_ticks = 4
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

@@ -11,19 +11,22 @@ var spectrum
 var values = []
 
 # FFT Graph
-@export var Line_Color : Color = Color.YELLOW
+@export var Line_Color : Color = Color.WHITE
 @export var BG_Color : Color = Color.BLACK
+@export var Grid_Lines_Color : Color = Color.WEB_GRAY
+@export var with_fill : bool = false
+@export var Fill_Color : Color = Color.DIM_GRAY
 
-@export var X_Label = ""
-@export var X_ticks = 1
-@export var Y_Label = ""
-@export var Y_ticks = 1
+@export var X_Label : String = "Hz"
+@export_range(1,10) var X_ticks : int = 1
+@export var Y_Label : String = "dB"
+@export_range(1,5) var Y_ticks : int = 1
 
-var X_min_value = 0
 var X_max_value : float = FREQ_MAX/1000.0
+var X_min_value : float = 0
 
+var Y_max_value : float = 0
 var Y_min_value : float = -MIN_DB
-var Y_max_value = 0
 
 func _ready():
 	$FFTTimer.start()
@@ -38,6 +41,9 @@ func _ready():
 	
 	$"Panel/FFT Graph/FFT Display".get_material().set_shader_parameter("line_color", Line_Color)
 	$"Panel/FFT Graph/FFT Display".get_material().set_shader_parameter("bg_color", BG_Color)
+	$"Panel/FFT Graph/FFT Display".get_material().set_shader_parameter("grid_lines_color", Grid_Lines_Color)
+	$"Panel/FFT Graph/FFT Display".get_material().set_shader_parameter("fill_color", Fill_Color)
+	$"Panel/FFT Graph/FFT Display".get_material().set_shader_parameter("with_fill", with_fill)
 	$"Panel/FFT Graph/FFT Display".get_material().set_shader_parameter("vertical_grid_lines", X_ticks)
 	$"Panel/FFT Graph/FFT Display".get_material().set_shader_parameter("horizontal_grid_lines", Y_ticks)
 	
