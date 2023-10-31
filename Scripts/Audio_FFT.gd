@@ -5,7 +5,7 @@ const FREQ_MAX = 10000.0
 
 const WIDTH = 256
 const HEIGHT = 100
-const MIN_DB = 60
+@export var MIN_DB = 60
 
 var spectrum
 var values = []

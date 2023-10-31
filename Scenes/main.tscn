@@ -29,6 +29,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3jwv1")
+MIN_DB = 110
 Grid_Lines_Color = Color(0.505882, 0.505882, 0.505882, 1)
 with_fill = true
 Fill_Color = Color(0.25098, 0, 0.94902, 1)
