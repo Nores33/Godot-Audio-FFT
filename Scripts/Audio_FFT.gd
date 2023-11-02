@@ -22,6 +22,9 @@ var values = []
 @export var Y_Label : String = "dB"
 @export_range(1,5) var Y_ticks : int = 1
 
+# Waterfall Graph
+@export var time_factor : float = 0.1
+
 var X_max_value : float = FREQ_MAX/1000.0
 var X_min_value : float = 0
 
@@ -31,6 +34,7 @@ var Y_min_value : float = -MIN_DB
 func _ready():
 	$FFTTimer.start()
 	spectrum = AudioServer.get_bus_effect_instance(0, 0)
+	$"Panel/Waterfall Graph/WaterfallViewport/ColorRect".get_material().set_shader_parameter("time_factor",time_factor)
 	# $"WaterfallViewport/ColorRect".get_material().set_shader_parameter("time_factor", 5)
 	values.resize(VU_COUNT)
 	values.fill(0.0)
@@ -81,7 +85,6 @@ func _process(_delta):
 	
 	for i in range(VU_COUNT):
 		values[i] = data[i]
-	
 	$"Panel/Waterfall Graph/WaterfallViewport/ColorRect".get_material().set_shader_parameter("values",values)
 
 func _on_fft_timer_timeout():

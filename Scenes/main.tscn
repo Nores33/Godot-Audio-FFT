@@ -36,6 +36,7 @@ Fill_Color = Color(0.25098, 0, 0.94902, 1)
 X_Label = "KHz"
 X_ticks = 6
 Y_ticks = 4
+time_factor = 0.5
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_t28n0")
